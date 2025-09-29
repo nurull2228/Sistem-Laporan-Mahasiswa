@@ -14,5 +14,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return "Sistem Pelaporan Masalah - Teknik Informatika";
+});
+
+Route::get('/daftar', function () {
+    return "Daftar masalah";
+});
+
+Route::get('/daftar-masalah', function () {
+    return "List Daftar Masalah";
 });
