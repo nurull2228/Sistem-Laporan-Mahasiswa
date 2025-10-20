@@ -10,11 +10,13 @@ class MahasiswaController extends Controller
     /**
      * Display a listing of the resource.
      */
+
     public function index()
-    {
-        $mahasiswas = \App\Models\Mahasiswa::orderBy('nama')->paginate(10);
+{
+    $mahasiswas = \App\Models\Mahasiswa::orderBy('nama')->paginate(10);
     return view('mahasiswa.index', compact('mahasiswas'));
-    }
+}
+
 
     /**
      * Show the form for creating a new resource.
@@ -27,7 +29,7 @@ class MahasiswaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Illuminate\Http\Request $request)
+    public function store(\Illuminate\Http\Request $request)
     {
          $validated = $request->validate([
         'nama' => ['required','string','max:100'],
