@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Http\Request;
 
-class Controller extends BaseController
+abstract class Controller
 {
-    use AuthorizesRequests, ValidatesRequests;
+    public function index(Request $request)
+    {
+        $query = \App\Models\Laporan::with('mahasiswa')->latest();
+        if ($request->filled('status') && in_array($request->status, ['baru','diproses','selesai'])) {
+            $query->where('status', $request->status);
+        }
+        $laporans = $query->paginate(10)->withQueryString();
+        return view('laporan.index', compact('laporans'));
+    }
 }
-
